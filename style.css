@@ -1,0 +1,202 @@
+/* === Базовые стили (оставил как было) === */
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#111827;background:#fafafa;line-height:1.5}
+img{max-width:100%;display:block}
+:root{--brand:#d5001c;--brand-dark:#8a0012;--bg:#fff;--muted:#6b7280}
+.container{width:min(1100px,92vw);margin:0 auto}
+
+/* header */
+.header{background:var(--bg);border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:10}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:40px;width:auto}
+.nav{display:flex;gap:16px}
+.nav a{text-decoration:none;color:#111;padding:8px 10px;border-radius:10px}
+.nav a:hover,.nav a.active{background:#f3f4f6}
+
+/* hero (если используешь блок с фоном) */
+.hero-bg{height:100vh;background:url("img/hero_bg.png") center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;position:relative}
+.hero-bg::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
+.hero-bg__content{position:relative;z-index:1;max-width:800px;padding:0 20px}
+.hero-bg__content h1{font-size:clamp(48px,7vw,90px);font-weight:900;line-height:1.1;margin-bottom:24px}
+.hero-bg__content p{font-size:clamp(16px,1.8vw,22px);color:#ddd;margin-bottom:35px}
+.btn-gray{display:inline-block;text-decoration:none;background:#2f2f2f;color:#fff;padding:14px 28px;border-radius:12px;font-weight:700;transition:background .25s}
+.btn-gray:hover{background:#444}
+
+/* секции */
+.section{padding:60px 0}
+.section h2{margin:0 0 20px;font-size:clamp(22px,2.5vw,32px);text-align:center}
+
+/* === КАРТОЧКИ (жёстко фиксируем нужные значения) === */
+
+/* сетка шире под панорамные фото */
+.grid{
+  display:grid !important;
+  gap:24px !important;
+  grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)) !important;
+  justify-content:center !important;
+}
+
+/* карточка — шире и с анимацией */
+.card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,.1);
+  transition:transform .25s ease, box-shadow .25s ease;
+  max-width:650px !important;   /* чтобы реально была шире */
+  width:100% !important;
+  margin:0 auto !important;
+}
+.card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 12px 28px rgba(0,0,0,.18)}
+
+/* картинки внутри карточек — показываем целиком, под твои 2560×697 */
+.card img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  aspect-ratio:3.67 / 1 !important;  /* точное соотношение */
+  object-fit:contain !important;      /* ничего не режем */
+  background:#fff !important;
+  border-bottom:1px solid #eee;
+}
+
+/* текст и кнопка */
+.card .p{padding:16px 20px}
+.card .p h3{font-size:22px;margin-bottom:6px}
+.price{font-weight:800;color:#111}
+.btn{display:inline-block;padding:10px 16px;border-radius:12px;font-weight:700;cursor:pointer}
+.btn-outline{
+  width:100%;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  color:#111;
+  margin-top:12px;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:700;
+  transition:background .2s,color .2s,border-color .2s
+}
+.btn-outline:hover{background:#111;color:#fff;border-color:#111}
+
+/* footer */
+.footer{margin-top:30px;border-top:1px solid #e5e7eb;background:#fff}
+.footer .container{padding:16px 0;color:var(--muted);font-size:.95rem;text-align:center}
+
+/* адаптив */
+@media (max-width:900px){
+  .grid{grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)) !important;}
+}
+@media (max-width:600px){
+  .grid{grid-template-columns:1fr !important;}
+  .nav{gap:8px}
+}
+/* === 1) "Войти"/"Выйти" как пункты меню === */
+.header .nav .chip{
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  position: relative !important;
+  transition: background .2s !important;
+}
+.header .nav .chip:hover{
+  background: rgba(255,255,255,.10) !important; /* как у .nav a:hover на тёмной шапке */
+}
+
+/* Если когда-то будет светлая шапка (как на contacts): */
+/* .header.light .nav .chip{ color:#111 !important; } */
+/* .header.light .nav .chip:hover{ background: rgba(0,0,0,.06) !important; } */
+
+
+/* === 2) Модалка аккаунта — тёмное стекло, скругления === */
+dialog#authModal{
+  width: min(500px, 92vw) !important;
+  border: none !important;
+  border-radius: 20px !important;
+  padding: 0 !important;
+  background: rgba(15,15,15,.94) !important;
+  color: #fff !important;
+  box-shadow: 0 28px 80px rgba(0,0,0,.6) !important;
+  backdrop-filter: blur(8px) !important;
+  overflow: hidden !important;
+}
+dialog#authModal::backdrop{ background: rgba(0,0,0,.5) !important; }
+
+.auth-head{
+  display:flex !important; align-items:center !important; justify-content:space-between !important;
+  padding: 16px 20px !important;
+  border-bottom: 1px solid rgba(255,255,255,.15) !important;
+  background: rgba(255,255,255,.03) !important;
+  font-weight: 800 !important; color:#fff !important;
+}
+.auth-close{
+  background: transparent !important; border: none !important; color:#fff !important;
+  font-size: 22px !important; cursor: pointer !important; padding: 4px 8px !important; border-radius: 8px !important;
+}
+.auth-close:hover{ background: rgba(255,255,255,.15) !important; }
+
+.auth-body{ padding: 20px !important; }
+.auth-body label{ display:block !important; font-weight:700 !important; margin-top:12px !important; color:#fff !important; }
+.auth-body input{
+  width:100% !important; padding:12px 14px !important; margin-top:6px !important;
+  border-radius: 12px !important;
+  background: rgba(255,255,255,.08) !important;
+  border:1px solid rgba(255,255,255,.22) !important; color:#fff !important;
+}
+.auth-body input::placeholder{ color: rgba(255,255,255,.6) !important; }
+.auth-body input:focus{ outline:none !important; border-color:#fff !important; }
+
+/* Кнопки в модалке */
+.auth-actions{ display:flex !important; gap:10px !important; margin-top:14px !important; }
+.auth-actions .primary{
+  flex:1 1 auto !important; padding:12px 14px !important; border-radius:12px !important;
+  background:#fff !important; color:#111 !important; border:1px solid #fff !important; font-weight:800 !important; cursor:pointer !important;
+  transition: background .2s, color .2s, border-color .2s !important;
+}
+.auth-actions .primary:hover{ background:#d5001c !important; color:#fff !important; border-color:#d5001c !important; }
+.auth-actions button:not(.primary){
+  flex:1 1 auto !important; padding:12px 14px !important; border-radius:12px !important;
+  background: transparent !important; color:#fff !important; border:1px solid rgba(255,255,255,.22) !important; font-weight:800 !important;
+}
+.auth-actions button:not(.primary):hover{ background: rgba(255,255,255,.10) !important; border-color:#fff !important; }
+
+/* === 3) Toast-уведомления (используются в script.js) === */
+.toast{
+  position: fixed; left: 50%; transform: translateX(-50%) translateY(8px);
+  bottom: 24px; background:#111; color:#fff; padding:10px 14px; border-radius:12px;
+  opacity:0; transition: opacity .2s, transform .2s; z-index: 1000; font-weight:700;
+}
+.toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+.toast--warn{ background:#d5001c; }
+/* === Исправляем активную кнопку в шапке === */
+
+/* убираем фон и делаем текст белым на тёмной шапке */
+.header .nav a.active {
+  background: transparent !important;
+  color: #fff !important; /* белый текст */
+  font-weight: 700;
+  position: relative;
+}
+
+/* аккуратная белая полоска под активным пунктом */
+.header .nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -6px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* при наведении слегка подсвечивается, но не меняет цвет текста */
+.header .nav a:hover {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+}

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Porsche 911 — Подробнее</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== Страница модели ===== */
+    .product-wrap{
+      padding:100px 20px; max-width:1100px; margin:0 auto; color:#111;
+      display:grid; grid-template-columns:1.2fr .8fr; gap:28px;
+    }
+    .product-img{
+      width:100%; border-radius:16px; box-shadow:0 5px 30px rgba(0,0,0,.15); background:#fff;
+    }
+    .product-title{font-size:clamp(28px,4vw,48px); margin:6px 0 10px; font-weight:900}
+    .product-text{font-size:18px; line-height:1.6; color:#444; margin:0 0 10px}
+    .price-lg{font-size:20px; font-weight:800; margin:10px 0 20px}
+
+    /* карточка покупки */
+    .buy-card{
+      background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:18px;
+      box-shadow:0 8px 20px rgba(0,0,0,.08); height:fit-content;
+      position:sticky; top:90px;
+    }
+    .buy-card h3{margin:0 0 10px; font-size:22px}
+    .form-row{margin-top:10px}
+    .form-row label{display:block; font-weight:700; margin-bottom:6px}
+    .form-row input{
+      width:100%; padding:12px 14px; border:1px solid #e5e7eb; border-radius:12px; font:inherit;
+      background:#fafafa;
+    }
+    .form-row input:focus{outline:none; border-color:#111}
+    .btn-wide{width:100%; margin-top:12px}
+
+    /* шапка как на главной (прозрачная) */
+    .header{
+      position:fixed; top:0; left:0; width:100%;
+      background:rgba(0,0,0,.7); backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(255,255,255,.1); z-index:100;
+    }
+    .header-inner{display:flex; align-items:center; justify-content:space-between; width:min(1100px,90%); margin:0 auto; padding:10px 0}
+    .nav a{color:#fff; text-decoration:none; padding:8px 12px; border-radius:8px}
+    .nav a:hover{background:rgba(255,255,255,.1)}
+    .back-link{display:inline-block; margin-top:24px; text-decoration:none; color:#fff; background:#111; padding:10px 18px; border-radius:12px}
+    .back-link:hover{background:#d5001c}
+
+    @media (max-width:900px){
+      .product-wrap{grid-template-columns:1fr; gap:20px}
+      .buy-card{position:static}
+    }
+  </style>
+</head>
+<body>
+  <!-- Шапка -->
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="index.html"><img src="img/logo.png" alt="Porsche логотип" height="50"></a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Контент -->
+  <main>
+    <section class="product-wrap">
+      <!-- Слева — изображение и описание -->
+      <div>
+        <img class="product-img" src="img/car_911.png" alt="Porsche 911">
+        <h1 class="product-title">Porsche 911 Carrera</h1>
+        <p class="product-text">
+          Легендарное купе с фирменной управляемостью и динамикой. Современные технологии и классический силуэт — стандарт спортивного совершенства.
+        </p>
+        <p class="price-lg">Цена: от 12 500 000 ₽</p>
+        <a href="index.html" class="back-link">← Назад к моделям</a>
+      </div>
+
+      <!-- Справа — форма заявки (ЛР-2) -->
+      <aside class="buy-card">
+        <h3>Оставить заявку</h3>
+        <form id="orderForm" data-model="Porsche 911">
+          <div class="form-row">
+            <label for="ordName">Имя</label>
+            <input id="ordName" type="text" required placeholder="Ваше имя">
+          </div>
+          <div class="form-row">
+            <label for="ordPhone">Телефон</label>
+            <input id="ordPhone" type="tel" required placeholder="+7 900 000-00-00">
+          </div>
+          <div class="form-row">
+            <label for="ordQty">Количество</label>
+            <input id="ordQty" type="number" min="1" value="1">
+          </div>
+          <button type="submit" class="btn btn-outline btn-wide">Отправить заявку</button>
+        </form>
+        <p style="color:#6b7280; font-size:.95rem; margin-top:10px">
+          Нажимая «Отправить», вы соглашаетесь на обработку персональных данных.
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2025 Учебный проект — Porsche Style.</div>
+  </footer>
+
+  <!-- Подключаем общий скрипт (важно для ЛР-2) -->
+  <script src="script.js"></script>
+</body>
+</html>

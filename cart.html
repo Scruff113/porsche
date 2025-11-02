@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Корзина — Porsche</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .cart-wrap {
+      padding: 100px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .cart-item {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,.06);
+    }
+    .cart-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.3rem;
+    }
+    .cart-empty {
+      text-align: center;
+      color: #666;
+      margin-top: 40px;
+    }
+    .btn-clear {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #111;
+      color: #fff;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background .2s;
+      margin-top: 20px;
+    }
+    .btn-clear:hover { background: #d5001c; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="index.html"><img src="img/logo.png" alt="Porsche логотип" height="50"></a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="contacts.html">Контакты</a>
+        <a class="active" href="cart.html">Корзина</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="cart-wrap">
+    <h1>Корзина заказов</h1>
+    <div id="cartList"></div>
+    <button id="clearCart" class="btn-clear">Очистить корзину</button>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2025 Учебный проект — Porsche Style.</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const cartList = document.getElementById('cartList');
+    const clearBtn = document.getElementById('clearCart');
+
+    function renderCart() {
+      const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+      cartList.innerHTML = '';
+
+      if (orders.length === 0) {
+        cartList.innerHTML = '<p class="cart-empty">Корзина пуста.</p>';
+        clearBtn.style.display = 'none';
+        return;
+      }
+
+      orders.forEach(o => {
+        const item = document.createElement('div');
+        item.className = 'cart-item';
+        item.innerHTML = `
+          <h3>${o.model}</h3>
+          <p><strong>Имя:</strong> ${o.name}</p>
+          <p><strong>Телефон:</strong> ${o.phone}</p>
+          <p><strong>Количество:</strong> ${o.qty}</p>
+          <p><small>${new Date(o.ts).toLocaleString()}</small></p>
+        `;
+        cartList.appendChild(item);
+      });
+    }
+
+    clearBtn.addEventListener('click', () => {
+      localStorage.removeItem('orders');
+      renderCart();
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

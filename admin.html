@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Заказы — Demo</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:20px}
+    table{border-collapse:collapse;width:100%}
+    th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left}
+    th{background:#f3f4f6}
+    .muted{color:#6b7280}
+  </style>
+</head>
+<body>
+  <h1>Список заявок</h1>
+  <table id="tbl"><thead>
+    <tr><th>ID</th><th>Модель</th><th>Кол-во</th><th>Телефон</th><th>Пользователь</th><th>Создано</th></tr>
+  </thead><tbody></tbody></table>
+
+  <script>
+  async function load(){
+    const r = await fetch('/api/orders_list.php', {method:'POST'});
+    const data = await r.json();
+    const tbody = document.querySelector('#tbl tbody');
+    tbody.innerHTML = '';
+    (data.items||[]).forEach(x=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${x.id}</td>
+        <td>${x.model}</td>
+        <td>${x.qty}</td>
+        <td>${x.phone}</td>
+        <td>${x.user_name ? x.user_name+' ('+x.user_email+')' : '<span class="muted">гость</span>'}</td>
+        <td>${x.created_at}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+  load();
+  </script>
+</body>
+</html>

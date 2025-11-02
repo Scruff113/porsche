@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Контакты — Porsche</title>
+  <style>
+    /* ===== Базовый стиль ===== */
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #111; background: #fafafa; line-height: 1.5;
+    }
+
+    /* ===== Шапка ===== */
+    .header {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 100; margin: 0; padding: 0;
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 5%;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand img { height: 44px; width: auto; }
+    .nav { display: flex; gap: 18px; }
+    .nav a {
+      color: #111; font-weight: 600; padding: 8px 12px; border-radius: 10px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav a:hover, .nav a.active { background: rgba(0, 0, 0, 0.06); }
+
+    /* ===== Hero ===== */
+    .hero {
+      height: 75vh;
+      background: url("img/porsche_showroom.png") center/cover no-repeat;
+      position: relative; display:flex; align-items:center; justify-content:center;
+      text-align:center; color:#fff; margin-top:-1px; /* Убирает микро-отступ под шапкой */
+    }
+    .hero::before { content:""; position:absolute; inset:0; background:rgba(0,0,0,0.5); }
+    .hero-content { position:relative; z-index:1; max-width:700px; padding:0 20px; }
+    .hero h1 { font-size: clamp(36px, 6vw, 80px); margin: 0 0 20px; font-weight: 900; letter-spacing: .02em; }
+    .hero p { font-size: 1.2rem; color: #ddd; margin: 0; }
+
+    /* ===== Контакты ===== */
+    .contacts {
+      padding: 100px 0;
+      width: min(1000px, 90vw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr; /* одна колонка — второй карточки больше нет */
+      gap: 40px;
+    }
+
+    .contact-card {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
+      padding: 30px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+    .contact-card h2 { font-size: 1.8rem; font-weight: 800; margin: 0 0 20px; }
+    .contact-card p { margin: 8px 0; color: #444; }
+    .contact-card a { color: #d5001c; font-weight: 600; text-decoration: none; }
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* ===== Карта (обёртка для оформления iframe) ===== */
+    .map-wrap {
+      margin-top: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      overflow: hidden;           /* скругляем углы iframe */
+      box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    }
+    .map-iframe {
+      width: 100%;
+      height: 300px;
+      display: block;
+      border: 0;
+    }
+
+    /* ===== Футер ===== */
+    .footer {
+      border-top: 1px solid #e5e7eb; background: #fff; text-align: center;
+      color: #6b7280; padding: 20px; font-size: 0.95rem;
+    }
+
+    /* Чтобы контент не уходил под шапку */
+    body { padding-top: 70px; }
+  </style>
+</head>
+<body>
+  <!-- Шапка -->
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="img/logo.png" alt="Porsche логотип" />
+      </a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a class="active" href="contacts.html">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Контакты</h1>
+      <p>Свяжитесь с Porsche — мы всегда на связи</p>
+    </div>
+  </section>
+
+  <!-- Контактная информация -->
+  <section class="contacts">
+    <div class="contact-card">
+      <h2>Центр Porsche</h2>
+      <p><strong>Телефон:</strong> <a href="tel:+79009119111">+7 (900) 911-91-11</a></p>
+      <p><strong>E-mail:</strong> <a href="mailto:info@porsche.ru">info@porsche.ru</a></p>
+      <p><strong>Адрес:</strong> Москва, ул. Спортивная, 9</p>
+      <p><strong>Режим работы:</strong><br>Пн–Пт: 10:00–20:00<br>Сб: 11:00–18:00<br>Вс: выходной</p>
+
+      <!-- Яндекс.Карта (виджет) -->
+      <!-- Можно менять координаты в параметре ll=ДОЛГОТА,ШИРОТА и маркер pt=ДОЛГОТА,ШИРОТА -->
+      <div class="map-wrap">
+        <iframe
+          class="map-iframe"
+          src="https://yandex.ru/map-widget/v1/?ll=37.559%2C55.715&z=13&pt=37.559,55.715,pm2rdl"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Футер -->
+  <footer class="footer">
+    © 2025 Учебный проект — Porsche Style.
+  </footer>
+</body>
+</html>
